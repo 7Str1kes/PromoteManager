@@ -1,4 +1,4 @@
-package me.aguadev.mycodx.promoteManager.modules.command;
+package me.aguadev.mycodx.promoteManager.modules.command.list;
 
 import me.aguadev.mycodx.promoteManager.Logger;
 import me.aguadev.mycodx.promoteManager.utilities.Utils;
@@ -11,19 +11,19 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class PromoteCommand implements CommandExecutor {
+public class DowngradeCommand implements CommandExecutor {
     Logger logger = Logger.getInstance();
     public List<String> usage() {
-        return logger.getLang().getStringList("promote_command.usage");
+        return logger.getLang().getStringList("downgrade_command.usage");
     }
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player player)) {
             Utils.sendMessage(sender, logger.getLang().getString("global.only_players"));
             return true;
         }
 
-        if (!player.hasPermission("promotemanager.promote")) {
+        if (!player.hasPermission("promotemanager.downgrade")) {
             Utils.sendMessage(player, logger.getLang().getString("global.no_permissions"));
             return true;
         }
@@ -39,7 +39,7 @@ public class PromoteCommand implements CommandExecutor {
             return true;
         }
 
-        logger.getManager().promotePlayer(player, target);
+        logger.getManager().downgradePlayer(player, target);
         return true;
     }
 }

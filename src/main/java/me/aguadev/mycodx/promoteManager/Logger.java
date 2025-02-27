@@ -1,8 +1,9 @@
 package me.aguadev.mycodx.promoteManager;
 
 import lombok.Getter;
-import me.aguadev.mycodx.promoteManager.modules.command.DowngradeCommand;
-import me.aguadev.mycodx.promoteManager.modules.command.PromoteCommand;
+import me.aguadev.mycodx.promoteManager.modules.command.MainCommand;
+import me.aguadev.mycodx.promoteManager.modules.command.list.DowngradeCommand;
+import me.aguadev.mycodx.promoteManager.modules.command.list.PromoteCommand;
 import me.aguadev.mycodx.promoteManager.modules.manager.Manager;
 import me.aguadev.mycodx.promoteManager.utilities.config.ConfigFile;
 
@@ -40,6 +41,7 @@ public class Logger {
     }
 
     public void loadCommands() {
+        Objects.requireNonNull(main.getCommand("promotemanager")).setExecutor(new MainCommand());
         Objects.requireNonNull(main.getCommand("promote")).setExecutor(new PromoteCommand());
         Objects.requireNonNull(main.getCommand("downgrade")).setExecutor(new DowngradeCommand());
     }

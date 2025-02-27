@@ -2,44 +2,41 @@ package me.aguadev.mycodx.promoteManager.modules.command;
 
 import me.aguadev.mycodx.promoteManager.Logger;
 import me.aguadev.mycodx.promoteManager.utilities.Utils;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
-public class DowngradeCommand implements CommandExecutor {
+public class MainCommand implements CommandExecutor {
     Logger logger = Logger.getInstance();
-    public List<String> usage() {
-        return logger.getLang().getStringList("downgrade_command.usage");
-    }
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         if (!(sender instanceof Player player)) {
             Utils.sendMessage(sender, logger.getLang().getString("global.only_players"));
             return true;
         }
 
-        if (!player.hasPermission("promotemanager.downgrade")) {
+        if (!player.hasPermission("promotemanager.admin")) {
             Utils.sendMessage(player, logger.getLang().getString("global.no_permissions"));
             return true;
         }
 
-        if (args.length != 1) {
-            Utils.sendMessage(player, String.join(" ", usage()));
+        if (args.length == 0) {
+            Utils.sendMessage(player, "&cIncorrect usage.");
             return true;
         }
 
-        Player target = Bukkit.getPlayer(args[0]);
-        if (target == null) {
-            Utils.sendMessage(player, logger.getLang().getString("global.player_not_found"));
-            return true;
+        String argument = args[0];
+        if (argument.equalsIgnoreCase("reload")) {
+            logger.getSettings().reload();
+            logger.getLang().reload();
+
+            Utils.sendMessage(player, logger.getLang().getString("global.config_reloaded"));
+        } else {
+            Utils.sendMessage(player, "&cIncorrect usage.");
         }
 
-        logger.getManager().downgradePlayer(player, target);
         return true;
     }
 }
