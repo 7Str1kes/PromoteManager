@@ -1,0 +1,12 @@
+name: PromoteManager
+version: '1.0-SNAPSHOT'
+main: me.aguadev.mycodx.promoteManager.Promote
+api-version: '1.21'
+authors: [ 7Str1kes ]
+depend: [LuckPerms]
+
+commands:
+  promote:
+    description: Promotea a un usuario
+  downgrade:
+    description: Baja de rango a un usuario

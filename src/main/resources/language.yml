@@ -1,0 +1,21 @@
+global:
+  only_players: "%prefix% &cThis command can only be executed by players."
+  no_permissions: "%prefix% &cYou do not have permission to use this command."
+  player_not_found: "%prefix% &cThe specified player could not be found."
+  config_reloaded: "%prefix% &aConfiguration files have been successfully reloaded."
+  no_ranks: "%prefix% &cNo ranks have been configured. Please check the settings."
+  data_error: "%prefix% &cAn error occurred while retrieving data from LuckPerms."
+
+promote_command:
+  usage:
+    - "%prefix% &cUsage: /promote <player>"
+  max_rank: "%prefix% &b<player> &ealready has the highest rank."
+  promoted: "%prefix% &eYou have been promoted to &b<rank> &eby &b<player>&e!"
+  target_promoted: "%prefix% &eYou have successfully promoted &b<player> &eto &b<rank>&e."
+
+downgrade_command:
+  usage:
+    - "%prefix% &cUsage: /downgrade <player>"
+  min_rank: "%prefix% &b<player> &ealready has the lowest rank."
+  target_downgraded: "%prefix% &eYou have successfully downgraded &b<player> &eto &b<rank>&e!"
+  downgraded: "%prefix% &eYou have been downgraded to &b<rank> &eby &b<player>&e."

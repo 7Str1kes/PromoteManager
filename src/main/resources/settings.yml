@@ -1,0 +1,12 @@
+prefix: "&bPromoteManager &7· "
+
+ranks:
+  - "owner"
+  - "co-owner"
+  - "manager"
+  - "developer"
+  - "admin"
+  - "srmod"
+  - "mod"
+  - "t-mod"
+  - "helper"
