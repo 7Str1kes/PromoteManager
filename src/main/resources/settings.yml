@@ -10,3 +10,84 @@ ranks:
   - "mod"
   - "t-mod"
   - "helper"
+
+discord:
+  webhook: ""
+  embeds:
+    rank_add:
+      content: "" # Shows out of embed
+      title: "🔮 | Rango Añadido"
+      description: "Se le ha añadido el rango <rank> a <player>." # Shows in embed
+      color: "#E91111" # Embed color
+      author: "" # Author of embed
+      author_url: "" # When clicking author
+      author_icon: "" # Author icon
+      footer: "© | PromoteManager" # Footer of embed
+      footer_icon: "" # Footer icon of embed
+      thumbnail: "" # Icon on the right of embed
+    rank_add_temp:
+      content: "" # Shows out of embed
+      title: "🔮 | Rango Añadido"
+      description: "Se le ha añadido el rango <rank> a <player> por <tiempo>." # Shows in embed
+      color: "#E91111" # Embed color
+      author: "" # Author of embed
+      author_url: "" # When clicking author
+      author_icon: "" # Author icon
+      footer: "© | PromoteManager" # Footer of embed
+      footer_icon: "" # Footer icon of embed
+      thumbnail: "" # Icon on the right of embed
+    rank_set:
+      content: "" # Shows out of embed
+      title: "🔮 | Rango Establecido"
+      description: "Se le ha establecido el rango <rank> a <player>." # Shows in embed
+      color: "#E91111" # Embed color
+      author: "" # Author of embed
+      author_url: "" # When clicking author
+      author_icon: "" # Author icon
+      footer: "© | PromoteManager" # Footer of embed
+      footer_icon: "" # Footer icon of embed
+      thumbnail: "" # Icon on the right of embed
+    rank_remove:
+      content: "" # Shows out of embed
+      title: "🔮 | Rango Removido"
+      description: "Se le ha removido el rango <rank> a <player>." # Shows in embed
+      color: "#E91111" # Embed color
+      author: "" # Author of embed
+      author_url: "" # When clicking author
+      author_icon: "" # Author icon
+      footer: "© | PromoteManager" # Footer of embed
+      footer_icon: "" # Footer icon of embed
+      thumbnail: "" # Icon on the right of embed
+    player_permission_add:
+      content: "" # Shows out of embed
+      title: "🔮 | Permiso Añadido"
+      description: "Se le ha añadido el permiso <permission> a <player>." # Shows in embed
+      color: "#E91111" # Embed color
+      author: "" # Author of embed
+      author_url: "" # When clicking author
+      author_icon: "" # Author icon
+      footer: "© | PromoteManager" # Footer of embed
+      footer_icon: "" # Footer icon of embed
+      thumbnail: "" # Icon on the right of embed
+    player_permission_add_temp:
+      content: "" # Shows out of embed
+      title: "🔮 | Permiso Añadido"
+      description: "Se le ha añadido el permiso <permission> a <player> por <tiempo>." # Shows in embed
+      color: "#E91111" # Embed color
+      author: "" # Author of embed
+      author_url: "" # When clicking author
+      author_icon: "" # Author icon
+      footer: "© | PromoteManager" # Footer of embed
+      footer_icon: "" # Footer icon of embed
+      thumbnail: "" # Icon on the right of embed
+    player_permission_remove:
+      content: "" # Shows out of embed
+      title: "🔮 | Permiso Removido"
+      description: "Se le ha removido el permiso <permission> a <player>." # Shows in embed
+      color: "#E91111" # Embed color
+      author: "" # Author of embed
+      author_url: "" # When clicking author
+      author_icon: "" # Author icon
+      footer: "© | PromoteManager" # Footer of embed
+      footer_icon: "" # Footer icon of embed
+      thumbnail: "" # Icon on the right of embed

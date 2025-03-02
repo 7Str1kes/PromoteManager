@@ -6,7 +6,11 @@ authors: [ 7Str1kes ]
 depend: [LuckPerms]
 
 commands:
+  promotemanager:
+    description: Main command
   promote:
     description: Promotea a un usuario
   downgrade:
     description: Baja de rango a un usuario
+  demote:
+    description: Quita todos los rangos de la lista a un usuario

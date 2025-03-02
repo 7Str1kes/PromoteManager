@@ -19,3 +19,10 @@ downgrade_command:
   min_rank: "%prefix% &b<player> &ealready has the lowest rank."
   target_downgraded: "%prefix% &eYou have successfully downgraded &b<player> &eto &b<rank>&e!"
   downgraded: "%prefix% &eYou have been downgraded to &b<rank> &eby &b<player>&e."
+
+demote_command:
+  usage:
+    - "%prefix% &cUsage: /demote <player>"
+  no_ranks_to_demote: "%prefix% &b<player> &ehas no ranks to be demoted from the list."
+  target_demoted: "%prefix% &eYou have successfully demoted &b<player> &efrom their ranks."
+  demoted: "%prefix% &eYou have been demoted from your ranks by &b<player>&e."
