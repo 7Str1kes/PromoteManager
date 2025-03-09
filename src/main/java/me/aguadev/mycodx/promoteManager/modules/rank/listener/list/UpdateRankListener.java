@@ -67,17 +67,23 @@ public class UpdateRankListener extends Manager implements Listener {
     public void sendLogRank(String playerName, String oldRank, String newRank, boolean isTemporary) {
         if (newRank.equalsIgnoreCase("Ninguno")) return;
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            HttpPost post = new HttpPost("https://discord.com/api/webhooks/1348082210841952268/DN3bI0Q_JBDfmi-qsYOBY6Kh5KquiACYMffxLLDe6YeckM3g1OjO2ar7yfkTIUmsJdra");
+            HttpPost post = new HttpPost(getFiles().getSettings().getString("discord.webhook"));
             post.addHeader("Content-Type", "application/json");
 
+            String descriptionTemplate = getFiles().getSettings().getString("discord.embeds.rank_update.description", "");
+            String description = descriptionTemplate
+                    .replace("<player>", playerName)
+                    .replace("<previousRank>", oldRank.replace("default", "Usuario"))
+                    .replace("<newRank>", newRank.replace("default", "Usuario"))
+                    .replace("<isTemporary>", isTemporary ? "Yes" : "No");
+
+            int color = getFiles().getSettings().getInt("discord.embeds.rank_update.color");
+
             JsonObject embed = new JsonObject();
-            embed.addProperty("title", "\uD83D\uDD2E | Rank Updated");
-            embed.addProperty("description", "**Player:** `" + playerName + "`\n"
-                    + "**Previous Rank:** `" + oldRank + "`\n"
-                    + "**New Rank:** `" + newRank + "`\n"
-                    + "**Temporary:** `" + (isTemporary ? "Yes" : "No") + "`");
+            embed.addProperty("title", getFiles().getSettings().getString("discord.embeds.rank_update.title"));
+            embed.addProperty("description", description);
             embed.addProperty("timestamp", Instant.now().toString());
-            embed.addProperty("color", 15105570);
+            embed.addProperty("color", color);
 
             JsonObject footer = new JsonObject();
             footer.addProperty("text", "Rank Update Log");

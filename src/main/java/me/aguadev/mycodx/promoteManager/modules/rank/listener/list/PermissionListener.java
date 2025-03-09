@@ -23,7 +23,6 @@ import java.util.Set;
 import java.util.UUID;
 
 public class PermissionListener extends Manager implements Listener {
-
     private final Set<String> previousPermissions = new HashSet<>();
 
     public PermissionListener(Promote main) {
@@ -41,17 +40,25 @@ public class PermissionListener extends Manager implements Listener {
         UUID playerUUID = user.getUniqueId();
         String playerName = Bukkit.getOfflinePlayer(playerUUID).getName();
 
-        Set<String> currentPermissions = getStrings(user, playerName);
+        Set<String> currentPermissions = getStrings(user);
 
         previousPermissions.stream()
                 .filter(permission -> !currentPermissions.contains(permission))
                 .forEach(permission -> this.sendLogPermissionRemove(playerName, permission));
 
+        currentPermissions.stream()
+                .filter(permission -> !previousPermissions.contains(permission))
+                .forEach(permission -> {
+                    boolean isTemporary = user.getNodes().stream()
+                            .anyMatch(node -> node instanceof PermissionNode && node.hasExpiry());
+                    //this.sendLogPermissionAdd(playerName, permission, isTemporary);
+                });
+
         previousPermissions.clear();
         previousPermissions.addAll(currentPermissions);
     }
 
-    private @NotNull Set<String> getStrings(User user, String playerName) {
+    private @NotNull Set<String> getStrings(User user) {
         Set<String> currentPermissions = new HashSet<>();
 
         for (Node node : user.getNodes()) {
@@ -60,28 +67,26 @@ public class PermissionListener extends Manager implements Listener {
             }
         }
 
-        currentPermissions.forEach(permission -> {
-            if (!previousPermissions.contains(permission)) {
-                boolean isTemporary = user.getNodes().stream()
-                        .anyMatch(node -> node instanceof PermissionNode && node.hasExpiry());
-
-                this.sendLogPermissionAdd(playerName, permission, isTemporary);
-            }
-        });
         return currentPermissions;
     }
 
     public void sendLogPermissionRemove(String playerName, String permission) {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            HttpPost post = new HttpPost("https://discord.com/api/webhooks/1348082210841952268/DN3bI0Q_JBDfmi-qsYOBY6Kh5KquiACYMffxLLDe6YeckM3g1OjO2ar7yfkTIUmsJdra");
+            HttpPost post = new HttpPost(getFiles().getSettings().getString("discord.webhook"));
             post.addHeader("Content-Type", "application/json");
 
+            int color = getFiles().getSettings().getInt("discord.embeds.player_permission_remove.color");
+
+            String descriptionTemplate = getFiles().getSettings().getString("discord.embeds.player_permission_remove.description", "");
+            String description = descriptionTemplate
+                    .replace("<player>", playerName)
+                    .replace("<permission>", permission);
+
             JsonObject embed = new JsonObject();
-            embed.addProperty("title", "\uD83D\uDD2E | Permission Removed");
-            embed.addProperty("description", "**Player:** `" + playerName + "`\n"
-                    + "**Permission:** `" + permission + "`");
+            embed.addProperty("title", getFiles().getSettings().getString("discord.embeds.player_permission_remove.title"));
+            embed.addProperty("description", description);
             embed.addProperty("timestamp", Instant.now().toString());
-            embed.addProperty("color", 16711680);
+            embed.addProperty("color", color);
 
             JsonObject footer = new JsonObject();
             footer.addProperty("text", "Permission Removal Log");
@@ -103,16 +108,22 @@ public class PermissionListener extends Manager implements Listener {
 
     public void sendLogPermissionAdd(String playerName, String permission, boolean isTemporary) {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            HttpPost post = new HttpPost("https://discord.com/api/webhooks/1348082210841952268/DN3bI0Q_JBDfmi-qsYOBY6Kh5KquiACYMffxLLDe6YeckM3g1OjO2ar7yfkTIUmsJdra");
+            HttpPost post = new HttpPost(getFiles().getSettings().getString("discord.webhook"));
             post.addHeader("Content-Type", "application/json");
+
+            int color = getFiles().getSettings().getInt("discord.embeds.player_permission_add.color");
+
+            String descriptionTemplate = getFiles().getSettings().getString("discord.embeds.player_permission_add.description", "");
+            String description = descriptionTemplate
+                    .replace("<player>", playerName)
+                    .replace("<permission>", permission)
+                    .replace("<isTemporary>", isTemporary ? "Yes" : "No");
 
             JsonObject embed = new JsonObject();
             embed.addProperty("title", "\uD83D\uDD2E | Permission Added");
-            embed.addProperty("description", "**Player:** `" + playerName + "`\n"
-                    + "**Permission:** `" + permission + "`\n"
-                    + "**Temporary:** `" + (isTemporary ? "Yes" : "No") + "`");
+            embed.addProperty("description", description);
             embed.addProperty("timestamp", Instant.now().toString());
-            embed.addProperty("color", 65280); // Verde
+            embed.addProperty("color", color); // Verde
 
             JsonObject footer = new JsonObject();
             footer.addProperty("text", "Permission Addition Log");

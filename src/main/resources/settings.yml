@@ -15,8 +15,8 @@ discord:
     rank_update:
       content: "" # Shows out of embed
       title: "🔮 | Rank Updated"
-      description: "**Player:** `<player>` \n **Previous Rank:** `<previousRank>` \n **New Rank:** `<newRank> \n **Temporary:** `<isTemporary>`" # Shows in embed
-      color: "15105570" # Embed color
+      description: "**Player:** `<player>` \n **Previous Rank:** `<previousRank>` \n **New Rank:** `<newRank>` \n **Temporary:** `<isTemporary>`" # Shows in embed
+      color: 15105570 # Embed color
       author: "" # Author of embed
       author_url: "" # When clicking author
       author_icon: "" # Author icon
@@ -27,7 +27,7 @@ discord:
       content: "" # Shows out of embed
       title: "🔮 | Permission Added"
       description: "**Player:** `<player>` \n **Permission:** `<permission>` \n **Temporary:** `<isTemporary>`" # Shows in embed
-      color: "16711680" # Embed color
+      color: 2817792 # Embed color
       author: "" # Author of embed
       author_url: "" # When clicking author
       author_icon: "" # Author icon
@@ -38,7 +38,7 @@ discord:
       content: "" # Shows out of embed
       title: "🔮 | Permission Removed"
       description: "**Player:** `<player>` \n **Permission:** `<permission>`" # Shows in embed
-      color: "16711680" # Embed color
+      color: 16711680 # Embed color
       author: "" # Author of embed
       author_url: "" # When clicking author
       author_icon: "" # Author icon
