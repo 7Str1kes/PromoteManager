@@ -52,6 +52,10 @@ public class UpdateRankListener extends Manager implements Listener {
         String oldRank = rankCache.getOrDefault(playerUUID, "Ninguno");
 
         if (!started || oldRank.equals(newRank)) return;
+        if (!rankCache.containsKey(playerUUID)) {
+            rankCache.put(playerUUID, newRank);
+            return;
+        }
 
         rankCache.put(playerUUID, newRank);
 
@@ -89,7 +93,7 @@ public class UpdateRankListener extends Manager implements Listener {
             post.setEntity(new StringEntity(json.toString()));
             httpClient.execute(post);
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
     }
 

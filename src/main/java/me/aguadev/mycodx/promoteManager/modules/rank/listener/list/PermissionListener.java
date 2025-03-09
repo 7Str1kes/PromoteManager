@@ -43,11 +43,9 @@ public class PermissionListener extends Manager implements Listener {
 
         Set<String> currentPermissions = getStrings(user, playerName);
 
-        previousPermissions.forEach(permission -> {
-            if (!currentPermissions.contains(permission)) {
-                this.sendLogPermissionRemove(playerName, permission);
-            }
-        });
+        previousPermissions.stream()
+                .filter(permission -> !currentPermissions.contains(permission))
+                .forEach(permission -> this.sendLogPermissionRemove(playerName, permission));
 
         previousPermissions.clear();
         previousPermissions.addAll(currentPermissions);
