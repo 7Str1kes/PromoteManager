@@ -9,9 +9,9 @@ import me.aguadev.mycodx.promoteManager.modules.rank.command.PromoteCommand;
 import me.aguadev.mycodx.promoteManager.modules.provider.Manager;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.Objects;
 
 @Getter
 public final class Promote extends JavaPlugin {
@@ -29,6 +29,8 @@ public final class Promote extends JavaPlugin {
         } catch (Exception e) {
             luckPerms = null;
         }
+
+        CloseableHttpClient httpClient = HttpClients.createDefault();
 
         rankManager = new RankManager(this);
 
