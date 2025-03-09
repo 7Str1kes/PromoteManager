@@ -8,3 +8,4 @@ PromoteManager is a plugin that allows server administrators to manage staff ran
 ## Commands
 * `/promote <player>` | Promotes the specified player to the next configured rank.
 * `/downgrade <player>` | Downgrades the specified player to the previous configured rank.
+* `/demote <player>` | Removes all staff ranks from the specified player based on the configured rank list.
