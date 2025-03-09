@@ -30,8 +30,6 @@ public final class Promote extends JavaPlugin {
             luckPerms = null;
         }
 
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-
         rankManager = new RankManager(this);
 
         manager = new Manager(this);
